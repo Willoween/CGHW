@@ -6,14 +6,15 @@ const canvas = document.getElementById('glCanvas');
 const gl = canvas.getContext('webgl2');
 if (!gl) { console.error('WebGL 2 not supported'); throw new Error(); }
 
-// canvas
+// canvas <- 600 x 600 cnavas (color 0.0, 0.0, 0.0, 1.0)
 canvas.width = 600;
 canvas.height = 600;
 resizeAspectRatio(gl, canvas);
 gl.viewport(0, 0, canvas.width, canvas.height);
 gl.clearColor(0.0, 0.0, 0.0, 1.0);
 
-// ---------- top-left overlay helper ----------
+//top left overlay helper
+//function to overlay the text on the top left of the canvas
 function setupTextTopLeft(canvas, msg) {
   const div = document.createElement('div');
   div.textContent = msg;
@@ -39,7 +40,7 @@ function setupTextTopLeft(canvas, msg) {
 // State
 let shader, vao;
 const STEP = 0.01;
-const SIDE = 0.2;          // keep your current size; change to 0.1 if your HW requires it
+const SIDE = 0.2;        
 const HALF = SIDE * 0.5;
 let offset = [0.0, 0.0];
 let infoText;
@@ -100,8 +101,7 @@ async function initShader() {
 
 async function main() {
   await initShader();
-
-  // show one line at the canvas's top-left and keep a handle for updates
+  
   infoText = setupTextTopLeft(canvas, 'Use arrow keys to move the rectangle');
 
   setupKeyboardEvents();
